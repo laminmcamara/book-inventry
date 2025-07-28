@@ -1,0 +1,159 @@
+/* ======== Book Inventory Styles ======== */
+
+/* Style rows with "read" status */
+tr.read {
+    background-image: linear-gradient(to bottom, #dfdfe2 1.845rem, #5aabbc 0.5rem);
+    color: blue;
+    font-weight: bold;
+  }
+  
+  /* Style rows with "to-read" status */
+  tr.to-read {
+    background-image: linear-gradient(to bottom, rgba(223, 223, 223, 0.7), white);
+    color: purple;
+    font-weight: bold;
+  }
+  
+  /* Style rows with "in-progress" status */
+  tr.in-progress {
+    background-image: linear-gradient(to bottom, rgba(222, 222, 222, 0.7) 1.845rem, #a04d4d);
+    color: red;
+    font-weight: bold;
+  }
+  
+  /* Make all spans inline-block to support padding and margin */
+  span {
+    display: inline-block;
+  }
+  
+  /* Styling the status label in "to-read" rows */
+  tr.to-read span.status {
+    border: 1px solid black;
+    background-image: linear-gradient(to right, #dfa2, #f1a2);
+  }
+  
+  /* Styling the status label in "read" rows */
+  tr.read span.status {
+    border: 2px solid #3ad;
+    background-image: linear-gradient(to top, #dcdc, #2a2a);
+  }
+  
+  /* Styling the status label in "in-progress" rows */
+  tr.in-progress span.status {
+    border: 1px solid rgb(15, 18, 19);
+    background-image: linear-gradient(to top, #7ff, #2a2a);
+  }
+  
+  /* Common size and padding for status labels and rating container */
+  span.status,
+  span[class^="rate"] {
+    height: 25px;
+    width: 100px;
+    padding: 5px 0;
+  }
+  
+  /* Style individual rating dots */
+  span[class^="rate"] > span {
+    border: 2px solid black;
+    border-radius: 50%; /* circular dots */
+    margin: 10px;
+    height: 7px;
+    width: 7px;
+    background-color: #fff; /* default unfilled dot */
+  }
+  
+  /* Fill one dot with green gradient for 1-star rating */
+  span.one > :first-child {
+    background-image: linear-gradient(67deg, #0a0, #bc12);
+  }
+  
+  /* Fill first two dots green gradient for 2-star rating */
+  span.two > :nth-child(-n+2) {
+    background-image: linear-gradient(to left, #0a0, #bc12);
+  }
+  
+  /* Fill all three dots green gradient for 3-star rating */
+  span.three span {
+    background-image: linear-gradient(to left, #0a0, #bc12);
+  }
+  
+  /* Center the entire table horizontally */
+  table {
+    margin: 0 auto;
+    border-collapse: collapse; /* cleaner borders */
+    width: 90%; /* slightly responsive */
+  }
+  
+  /* Table header styling */
+  thead th {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-bottom: 2px solid #ccc;
+    text-align: left;
+  }
+  
+  /* Table cell padding */
+  tbody td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* === Form styles for adding books === */
+  
+  form#bookForm {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Inputs and select fields styling */
+  input[type="text"],
+  select {
+    margin: 5px 8px;
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    width: 150px;
+  }
+  
+  /* Button styling */
+  button {
+    padding: 8px 15px;
+    background-color: #3a9ad9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Focus and hover effects for inputs and selects */
+  input[type="text"]:hover,
+  input[type="text"]:focus,
+  select:hover,
+  select:focus {
+    outline: none;
+    border: 2px solid #5aabbc;
+    background-color: #e6f2ff;
+    box-shadow: 0 0 5px rgba(90, 171, 188, 0.7);
+  }
+  
+  /* Focus and hover effects for button */
+  button:hover,
+  button:focus {
+    background-color: #5aabbc;
+    box-shadow: 0 0 8px rgba(90, 171, 188, 0.8);
+    outline: none;
+  }
+  
+  /* Accessibility: focus-visible for keyboard navigation */
+  input[type="text"]:focus-visible,
+  select:focus-visible,
+  button:focus-visible {
+    outline: 2px solid #5aabbc;
+    outline-offset: 2px;
+  }
+  

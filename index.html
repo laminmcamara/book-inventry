@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  <title>Book Inventory</title>
+</head>
+
+<body>
+  <h1>Book Inventory</h1>
+
+  <form id="bookForm">
+    <input type="text" id="title" placeholder="Title" required>
+    <input type="text" id="author" placeholder="Author" required>
+    <input type="text" id="category" placeholder="Category" required>
+    <select id="status" required>
+      <option value="">Status</option>
+      <option value="read">Read</option>
+      <option value="to-read">To Read</option>
+      <option value="in-progress">In Progress</option>
+    </select>
+    <select id="rate" required>
+      <option value="">Rate</option>
+      <option value="one">1</option>
+      <option value="two">2</option>
+      <option value="three">3</option>
+    </select>
+    <button type="submit">Add Book</button>
+  </form>
+  
+
+  <!-- Table for displaying the book inventory -->
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th> 
+        <th>Author</th>  
+        <th>Category</th> 
+        <th>Status</th>    
+        <th>Rate</th>    
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Book with "Read" status -->
+      <tr class="read">
+        <!-- Book details to be filled -->
+        <td>The Jungler</td>
+        <td>Lamin</td>
+        <td>Fiction</td>
+        <td>
+          <span class="status">Read</span> <!-- Status label -->
+        </td>
+        <td>
+          <!-- Rating shown by colored dots -->
+          <span class="rate two">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </td>
+      </tr>
+
+      <!-- Book with "To Read" status -->
+      <tr class="to-read">
+        <td>The Sailer</td>
+        <td>Mcamara</td>
+        <td>Comedy</td>
+        <td>
+          <span class="status">To read</span>
+        </td>
+        <td>
+          <span class="rate">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </td>
+      </tr>
+
+      <!-- Another book with "Read" status -->
+      <tr class="read">
+        <td>AI and Mankind</td>
+        <td>Lamin Masana</td>
+        <td>Non fiction</td>
+        <td>
+          <span class="status">Read</span>
+        </td>
+        <td>
+          <span class="rate one">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </td>
+      </tr> 
+
+      <!-- Book with "In Progress" status -->
+      <tr class="in-progress">
+        <td>Men Of Honor</td>
+        <td>Prof. David</td>
+        <td>Journal</td>
+        <td>
+          <span class="status">In Progress</span>
+        </td>
+        <td>
+          <span class="rate one">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </td>
+      </tr> 
+    </tbody>
+  </table>
+
+
+  <script>
+    const form = document.getElementById('bookForm');
+    const tbody = document.querySelector('table tbody');
+  
+    // Function to create rating dots
+    function createRatingSpan(rateClass) {
+      const rateSpan = document.createElement('span');
+      rateSpan.className = 'rate ' + rateClass;
+      for (let i = 0; i < 3; i++) {
+        const dot = document.createElement('span');
+        rateSpan.appendChild(dot);
+      }
+      return rateSpan;
+    }
+  
+    // Handle form submission to add book
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+  
+      // Get form values
+      const title = form.title.value.trim();
+      const author = form.author.value.trim();
+      const category = form.category.value.trim();
+      const status = form.status.value;
+      const rate = form.rate.value;
+  
+      // Validate form (already required on inputs, this is extra)
+      if (!title || !author || !category || !status || !rate) return;
+  
+      // Create a new table row
+      const tr = document.createElement('tr');
+      tr.className = status; // 'read', 'to-read', or 'in-progress'
+  
+      // Create each cell
+      const tdTitle = document.createElement('td');
+      tdTitle.textContent = title;
+      tr.appendChild(tdTitle);
+  
+      const tdAuthor = document.createElement('td');
+      tdAuthor.textContent = author;
+      tr.appendChild(tdAuthor);
+  
+      const tdCategory = document.createElement('td');
+      tdCategory.textContent = category;
+      tr.appendChild(tdCategory);
+  
+      const tdStatus = document.createElement('td');
+      const statusSpan = document.createElement('span');
+      statusSpan.className = 'status';
+      // Capitalize first letter + replace '-' with space
+      statusSpan.textContent = status.replace('-', ' ').replace(/\b\w/g, c => c.toUpperCase());
+      tdStatus.appendChild(statusSpan);
+      tr.appendChild(tdStatus);
+  
+      const tdRate = document.createElement('td');
+      if (status !== 'to-read') {
+      tdRate.appendChild(createRatingSpan(rate));
+    } else {
+      tdRate.textContent = '-'; // or "N/A", to indicate no rating yet
+    }
+      tr.appendChild(tdRate);
+  
+      // Append the new row
+      tbody.appendChild(tr);
+  
+      // Reset form for next entry
+      form.reset();
+    });
+  </script>
+  
+</body>
+
+</html>
